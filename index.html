@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEO — Tarjeta Digital</title>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Source Sans 3', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #f0f0f0;
       display: flex;
       justify-content: center;
@@ -107,6 +107,7 @@
     .section { margin-bottom: 28px; }
 
     .section-title {
+      font-family: 'PT Serif', serif;
       font-size: 18px;
       font-weight: 700;
       color: #000033;
@@ -198,7 +199,7 @@ const profiles = {
   jurgita: {
     nombre:          "Jurgita Šarkovaitė",
     cargo:           "Director",
-    foto:            "fotos/jurgita.jpg",
+    foto:            "fotos/jurgita.webp",
     correoPersonal:  "jurgita.sarkovaite@neo.com.pe",
     telefonoHref:    "tel:+51924273801",
     telefonoDisplay: "(+51) 924 273 801",
@@ -210,7 +211,7 @@ const profiles = {
   ricardo: {
     nombre:          "Ricardo Caballero",
     cargo:           "Gerente de Clientes",
-    foto:            "fotos/ricardo.jpg",
+    foto:            "fotos/ricardo.webp",
     correoPersonal:  "ricardo.caballero@neo.com.pe",
     telefonoHref:    "tel:+51951640866",
     telefonoDisplay: "(+51) 951 640 866",
@@ -222,7 +223,7 @@ const profiles = {
   joaquin: {
     nombre:          "Joaquin Aguirre",
     cargo:           "Consultor Junior",
-    foto:            "fotos/joaquin.jpg",
+    foto:            "fotos/joaquin.webp",
     correoPersonal:  "joaquin.aguirre@neo.com.pe",
     telefonoHref:    "tel:+51935983850",
     telefonoDisplay: "(+51) 935 983 850",
@@ -234,7 +235,7 @@ const profiles = {
   paola: {
     nombre:          "Paola Camarena",
     cargo:           "Consultor Senior",
-    foto:            "fotos/paola.jpg",
+    foto:            "fotos/paola.webp",
     correoPersonal:  "paola.camarena@neo.com.pe",
     telefonoHref:    "tel:+51993491221",
     telefonoDisplay: "(+51) 993 491 221",
@@ -246,17 +247,9 @@ const profiles = {
 };
 
 /* ───────── SVGs ───────── */
-const LOGO_SVG = `<svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="4" width="40" height="40" rx="2" stroke="white" stroke-width="2.5" fill="none"/>
-  <text x="22" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">N</text>
-  <circle cx="76" cy="24" r="20" stroke="white" stroke-width="2.5" fill="none"/>
-  <text x="76" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">E</text>
-  <ellipse cx="128" cy="24" rx="18" ry="20" stroke="white" stroke-width="2.5" fill="none"/>
-  <text x="128" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">O</text>
-  <line x1="157" y1="8" x2="157" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-  <text x="172" y="22" fill="white" font-family="'Source Sans 3',sans-serif" font-size="26" font-weight="700">25</text>
-  <text x="200" y="14" fill="white" font-family="'Source Sans 3',sans-serif" font-size="9" font-weight="300" letter-spacing="0.5">AÑOS</text>
-</svg>`;
+const LOGO_SVG = `<a href="https://neoconsulting.ai/" target="_blank" rel="noopener" style="display:flex;justify-content:center;">
+  <img src="fotos/logo.webp" alt="NEO Consulting" style="height:38px;width:auto;display:block;">
+</a>`;
 
 const PLACEHOLDER_SVG = `<div class="avatar-placeholder">
   <svg viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg">

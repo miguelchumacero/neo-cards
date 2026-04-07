@@ -1,9 +1,16 @@
-# Carpeta de fotos (local, no subir al repo)
-fotos/
+# Archivos de origen (no subir, solo guardar localmente)
+fotos/*.png
+fotos/*.jpg
+fotos/*.jpeg
+fotos/*.txt
+
+# Herramientas locales
+convertir-fotos.html
 
 # Archivos de trabajo (no necesarios para publicar)
 *.csv
 base.html
+generar-qr.html
 
 # OS
 .DS_Store
