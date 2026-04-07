@@ -1,0 +1,14 @@
+# Carpeta de fotos (local, no subir al repo)
+fotos/
+
+# Archivos de trabajo (no necesarios para publicar)
+*.csv
+base.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

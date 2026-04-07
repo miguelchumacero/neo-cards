@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEO — Tarjeta Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(to right, #09098E, #A2A5D7);
+      padding: 36px 28px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .logo svg { height: 38px; width: auto; }
+
+    .avatar-ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.5);
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #d4eaf7;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .avatar-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0; left: 0;
+    }
+
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: linear-gradient(180deg, #b8ddf0 0%, #7ec8f0 50%, #a8d87a 75%, #5aaa3a 100%);
+    }
+
+    .avatar-placeholder svg {
+      width: 110px;
+      height: 90px;
+      margin-bottom: -4px;
+    }
+
+    .name {
+      font-family: 'PT Serif', serif;
+      font-size: 35px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .role {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── BODY ── */
+    .body {
+      background: #f2f2f5;
+      flex: 1;
+      padding: 28px 20px 40px;
+    }
+
+    .section { margin-bottom: 28px; }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000033;
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+    .section-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: linear-gradient(to right, #09098E, #A2A5D7);
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      overflow: hidden;
+      transition: opacity 0.15s, transform 0.1s;
+      min-height: 52px;
+    }
+
+    .btn:hover  { opacity: 0.9; }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon svg { width: 22px; height: 22px; fill: #fff; }
+
+    .btn-label {
+      flex: 1;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.92);
+      padding-right: 52px;
+    }
+
+    /* ── NOT FOUND ── */
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 48px 28px;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .not-found .nf-icon { font-size: 64px; }
+
+    .not-found h2 {
+      font-family: 'PT Serif', serif;
+      font-size: 26px;
+      color: #000033;
+    }
+
+    .not-found p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div class="card" id="card"></div>
+
+<script>
+/* ─────────────────────────────────────────
+   PERFILES  — editar aquí para actualizar
+   ───────────────────────────────────────── */
+const profiles = {
+  jurgita: {
+    nombre:          "Jurgita Šarkovaitė",
+    cargo:           "Director",
+    foto:            "fotos/jurgita.jpg",
+    correoPersonal:  "jurgita.sarkovaite@neo.com.pe",
+    telefonoHref:    "tel:+51924273801",
+    telefonoDisplay: "(+51) 924 273 801",
+    linkedinPersonal:"https://linkedin.com/in/jurgitasarkovaite",
+    webNeo:          "https://neoconsulting.ai/",
+    correoNeo:       "informes@neoconsulting.ai",
+    linkedinNeo:     "https://www.linkedin.com/company/neo-consulting"
+  },
+  ricardo: {
+    nombre:          "Ricardo Caballero",
+    cargo:           "Gerente de Clientes",
+    foto:            "fotos/ricardo.jpg",
+    correoPersonal:  "ricardo.caballero@neo.com.pe",
+    telefonoHref:    "tel:+51951640866",
+    telefonoDisplay: "(+51) 951 640 866",
+    linkedinPersonal:"https://www.linkedin.com/in/ricardo-caballero-83922891/",
+    webNeo:          "https://neoconsulting.ai/",
+    correoNeo:       "informes@neoconsulting.ai",
+    linkedinNeo:     "https://www.linkedin.com/company/neo-consulting"
+  },
+  joaquin: {
+    nombre:          "Joaquin Aguirre",
+    cargo:           "Consultor Junior",
+    foto:            "fotos/joaquin.jpg",
+    correoPersonal:  "joaquin.aguirre@neo.com.pe",
+    telefonoHref:    "tel:+51935983850",
+    telefonoDisplay: "(+51) 935 983 850",
+    linkedinPersonal:"https://www.linkedin.com/in/joaquin-aguirrec/",
+    webNeo:          "https://neoconsulting.ai/",
+    correoNeo:       "informes@neoconsulting.ai",
+    linkedinNeo:     "https://www.linkedin.com/company/neo-consulting"
+  },
+  paola: {
+    nombre:          "Paola Camarena",
+    cargo:           "Consultor Senior",
+    foto:            "fotos/paola.jpg",
+    correoPersonal:  "paola.camarena@neo.com.pe",
+    telefonoHref:    "tel:+51993491221",
+    telefonoDisplay: "(+51) 993 491 221",
+    linkedinPersonal:"https://linkedin.com/in/paolacamarenaservan/",
+    webNeo:          "https://neoconsulting.ai/",
+    correoNeo:       "informes@neoconsulting.ai",
+    linkedinNeo:     "https://www.linkedin.com/company/neo-consulting"
+  }
+};
+
+/* ───────── SVGs ───────── */
+const LOGO_SVG = `<svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="4" width="40" height="40" rx="2" stroke="white" stroke-width="2.5" fill="none"/>
+  <text x="22" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">N</text>
+  <circle cx="76" cy="24" r="20" stroke="white" stroke-width="2.5" fill="none"/>
+  <text x="76" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">E</text>
+  <ellipse cx="128" cy="24" rx="18" ry="20" stroke="white" stroke-width="2.5" fill="none"/>
+  <text x="128" y="30" text-anchor="middle" fill="white" font-family="'Source Sans 3',sans-serif" font-size="22" font-weight="600">O</text>
+  <line x1="157" y1="8" x2="157" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <text x="172" y="22" fill="white" font-family="'Source Sans 3',sans-serif" font-size="26" font-weight="700">25</text>
+  <text x="200" y="14" fill="white" font-family="'Source Sans 3',sans-serif" font-size="9" font-weight="300" letter-spacing="0.5">AÑOS</text>
+</svg>`;
+
+const PLACEHOLDER_SVG = `<div class="avatar-placeholder">
+  <svg viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="55" cy="22" rx="22" ry="16" fill="white"/>
+    <ellipse cx="38" cy="28" rx="14" ry="11" fill="white"/>
+    <ellipse cx="72" cy="26" rx="12" ry="10" fill="white"/>
+    <ellipse cx="30" cy="78" rx="35" ry="22" fill="#6dc04a"/>
+    <ellipse cx="80" cy="82" rx="38" ry="20" fill="#5aaa3a"/>
+    <ellipse cx="55" cy="90" rx="60" ry="18" fill="#4a9a2a"/>
+  </svg>
+</div>`;
+
+/* ───────── Íconos ───────── */
+const ICON = {
+  email:    `<svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
+  phone:    `<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`,
+  linkedin: `<svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>`,
+  web:      `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`
+};
+
+function btn(href, icon, label) {
+  return `<a class="btn" href="${href}" target="_blank" rel="noopener">
+    <div class="btn-icon">${icon}</div>
+    <span class="btn-label">${label}</span>
+  </a>`;
+}
+
+/* ───────── Render ───────── */
+function render(key) {
+  const p = profiles[key];
+  const card = document.getElementById('card');
+
+  if (!p) {
+    document.title = 'NEO — Tarjeta Digital';
+    card.innerHTML = `
+      <div class="header" style="padding-bottom:36px">
+        <div class="logo">${LOGO_SVG}</div>
+      </div>
+      <div class="body">
+        <div class="not-found">
+          <div class="nf-icon">🔍</div>
+          <h2>Perfil no encontrado</h2>
+          <p>El código QR que escaneaste no corresponde a ningún perfil activo.<br>
+             Comunícate con el equipo NEO si crees que es un error.</p>
+          ${btn('https://neoconsulting.ai/', ICON.web, 'Visitar neoconsulting.ai')}
+        </div>
+      </div>`;
+    return;
+  }
+
+  document.title = `NEO — ${p.nombre}`;
+
+  const avatarHTML = p.foto
+    ? `<img src="${p.foto}" alt="${p.nombre}"
+           onload="this.nextElementSibling.style.display='none'"
+           onerror="this.style.display='none'">
+       ${PLACEHOLDER_SVG}`
+    : PLACEHOLDER_SVG;
+
+  card.innerHTML = `
+    <div class="header">
+      <div class="logo">${LOGO_SVG}</div>
+      <div class="avatar-ring">${avatarHTML}</div>
+      <div class="name">${p.nombre}</div>
+      <div class="role">${p.cargo}</div>
+    </div>
+
+    <div class="body">
+
+      <div class="section">
+        <div class="section-title">Contacto personal</div>
+        <div class="section-box">
+          ${btn('mailto:' + p.correoPersonal, ICON.email,    'Correo Personal Neo')}
+          ${btn(p.telefonoHref,               ICON.phone,    'Teléfono')}
+          ${btn(p.linkedinPersonal,           ICON.linkedin, 'LinkedIn Personal')}
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Redes sociales</div>
+        <div class="section-box">
+          ${btn(p.webNeo,                     ICON.web,      'Página Web Neo')}
+          ${btn('mailto:' + p.correoNeo,      ICON.email,    'Correo Neo')}
+          ${btn(p.linkedinNeo,                ICON.linkedin, 'LinkedIn Neo')}
+        </div>
+      </div>
+
+    </div>`;
+}
+
+const key = (new URLSearchParams(window.location.search).get('p') || '').toLowerCase().trim();
+render(key);
+</script>
+</body>
+</html>
