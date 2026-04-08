@@ -322,18 +322,18 @@ function render(key) {
       <div class="section">
         <div class="section-title">Contacto personal</div>
         <div class="section-box">
-          ${btn('mailto:' + p.correoPersonal, ICON.email,    'Correo Personal Neo')}
-          ${btn(p.telefonoHref,               ICON.phone,    'Teléfono')}
-          ${btn(p.linkedinPersonal,           ICON.linkedin, 'LinkedIn Personal')}
+          ${btn('mailto:' + p.correoPersonal, ICON.email,    p.correoPersonal)}
+          ${btn(p.telefonoHref,               ICON.phone,    p.telefonoDisplay)}
+          ${btn(p.linkedinPersonal,           ICON.linkedin, 'LinkedIn')}
         </div>
       </div>
 
       <div class="section">
-        <div class="section-title">Redes sociales</div>
+        <div class="section-title">Redes sociales Neo</div>
         <div class="section-box">
-          ${btn(p.webNeo,                     ICON.web,      'Página Web Neo')}
-          ${btn('mailto:' + p.correoNeo,      ICON.email,    'Correo Neo')}
-          ${btn(p.linkedinNeo,                ICON.linkedin, 'LinkedIn Neo')}
+          ${btn(p.webNeo,                     ICON.web,      'Página Web')}
+          ${btn('mailto:' + p.correoNeo,      ICON.email,    p.correoNeo)}
+          ${btn(p.linkedinNeo,                ICON.linkedin, 'LinkedIn')}
         </div>
       </div>
 
